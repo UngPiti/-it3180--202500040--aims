@@ -1,0 +1,30 @@
+[LAB05]
+Câu hỏi 1: Vì sao ở Phần A chưa gắn tag v1.1.0? Nếu đã gắn rồi thì bây giờ phải phát hành v1.1.1
+Ở Phần A, chưa gắn tag v1.1.0 vì quá trình phát triển và hoàn thiện phiên bản vẫn chưa kết thúc. Cần chờ đến khi các chức năng được tích hợp, kiểm thử và các bản sửa lỗi cần thiết được lan truyền đầy đủ sang nhánh release/lab05 mới chính thức đánh dấu phiên bản phát hành
+
+Tag là một mốc cố định trong lịch sử Git, dùng để xác định chính xác một commit tương ứng với phiên bản phát hành. Nếu đã gắn tag v1.1.0 quá sớm, sau đó tiếp tục sửa lỗi và thay đổi mã nguồn thì tag này vẫn trỏ đến commit cũ, không tự động cập nhật
+
+Theo quy tắc Semantic Versioning, nếu cần phát hành một bản sửa lỗi tiếp theo trên phiên bản 1.1.0 thì phải tăng số PATCH, tức là phát hành v1.1.1, thay vì di chuyển hoặc ghi đè tag v1.1.0
+
+Câu hỏi 2: Ưu, nhược điểm của upstream first so với release first? Nếu quên lan truyền bản sửa sang release/lab05, lệnh nào ở Phần F sẽ phát hiện?
+Ưu và nhược điểm của Upstream First so với Release First
+Upstream First:
+
+Ưu điểm: Bản sửa lỗi được tích hợp vào nhánh phát triển chính trước, giúp các phiên bản phát triển tiếp theo sớm được hưởng bản sửa. Việc duy trì và kiểm thử bản sửa trên nhánh chính cũng thuận tiện hơn
+
+Nhược điểm: Người dùng đang sử dụng phiên bản đã phát hành có thể phải chờ bản sửa được cherry-pick sang nhánh release. Quá trình cherry-pick có thể xảy ra xung đột và cần xử lý thủ công
+
+Release First:
+
+Ưu điểm: Ưu tiên sửa lỗi trên nhánh release, giúp nhanh chóng khắc phục vấn đề cho phiên bản đang được phát hành mà không phải chờ quá phát triển trên master
+
+Nhược điểm: Sau khi sửa lỗi trên nhánh release, cần tiếp tục cherry-pick bản sửa sang master và các nhánh release khác. Điều này có thể gây xung đột và làm tăng công việc bảo trì
+
+Lệnh phát hiện nếu quên lan truyền bản sửa sang release/lab05
+Có thể sử dụng lệnh: git cherry -v origin/release/lab05 origin/master
+
+Lệnh này so sánh các commit trên master chưa có commit tương đương trên release/lab05:
+
+Dấu -: Đã tìm thấy commit có patch tương đương trên nhánh đối chiếu
+Dấu +: Chưa tìm thấy commit có patch tương đương
+Nếu bản sửa lỗi đã có trên master nhưng chưa được lan truyền sang release/lab05, commit sửa lỗi có thể xuất hiện với dấu +

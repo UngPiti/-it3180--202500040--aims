@@ -1,0 +1,30 @@
+Câu hỏi 1: Vì sao chuẩn bị trên master trước, không sửa trên nhánh release?
+Vì master là nhánh phát triển chính, chứa những thay đổi mới nhất đã được kiểm duyệt và tích hợp. Trước khi phát hành, cần cập nhật thông tin phiên bản, CHANGELOG và các nội dung cần thiết, sau đó mới tạo nhánh release/lab04 để lưu giữ trạng thái phát hành ổn định
+
+Nếu sửa trực tiếp trên nhánh release, các thay đổi chuẩn bị phát hành có thể không xuất hiện trên master, dẫn đến hai nhánh bị lệch nhau và khó kiểm soát lịch sử phát triển
+
+Chuẩn bị trên master để đảm bảo phiên bản phát hành xuất phát từ dòng phát triển chính, còn release dùng để lưu giữ trạng thái ổn định của phiên bản đó
+
+Câu hỏi 2: Vì sao release/* không merge vào master?
+Trong quy trình LAB04, nhánh release/* được tạo từ master sau khi đã chuẩn bị phiên bản phát hành. Đây là nhánh dùng để bảo vệ và lưu giữ trạng thái của một bản release, không phải nhánh phát triển tính năng mới
+
+Các thay đổi mới như sort_by_title() và sort_by_cost() được thực hiện trên feature branch rồi merge vào master, không đưa ngược vào release/lab04
+
+Nếu merge những thay đổi phát triển mới vào release, phiên bản đã phát hành có thể bị thay đổi, làm mất tính ổn định và khả năng tái tạo của release
+
+master tiếp tục phát triển, còn release/* giữ nguyên trạng thái của phiên bản đã phát hành
+
+Câu hỏi 3: So sánh với GitFlow. Vì sao lên 1.0.0 mà không phải 0.4.0?
+LAB04 có quy trình đơn giản hơn GitFlow vì sử dụng master làm nhánh phát triển chính, không có nhánh develop riêng. Các nhánh release/* được sử dụng để quản lý và lưu giữ trạng thái phát hành. Trong khi đó, GitFlow sử dụng cả master và develop: develop tích hợp các tính năng đang phát triển, còn master lưu lịch sử các bản phát hành ổn định
+
+Theo quy tắc Semantic Versioning (SemVer), phiên bản có dạng:
+
+MAJOR.MINOR.PATCH
+
+MAJOR: Tăng khi có thay đổi không tương thích ngược.
+
+MINOR: Tăng khi bổ sung chức năng mới nhưng vẫn tương thích ngược.
+
+PATCH: Tăng khi sửa lỗi nhưng không bổ sung chức năng mới.
+
+Việc chọn 1.0.0 thay vì 0.4.0 thể hiện dự án đã đạt mốc phát hành phiên bản chính thức đầu tiên, thay vì tiếp tục được đánh số như các phiên bản đang trong giai đoạn phát triển ban đầu
