@@ -1,0 +1,10 @@
+# Giải đáp Thảo luận Lab 01
+
+1. **Vì sao phải dùng `git mv` thay vì di chuyển tệp thủ công qua File Explorer?**
+   - `git mv` giúp Git tự động theo dõi việc đổi tên/di chuyển tệp vào staging area ngay lập tức, giữ nguyên lịch sử commit (history/blame) của tệp đó mà không làm Git coi đó là một tệp mới bị xóa và tạo lại.
+
+2. **`release/lab01` có phải là một baseline không?**
+   - Có. Đây là điểm mốc cấu hình (baseline) cố định đã qua kiểm thử/thống nhất dùng để làm căn cứ phát triển hoặc đóng gói sản phẩm.
+
+3. **Vì sao không commit trực tiếp lên `master` dù làm việc một mình?**
+   - Nhằm tuân thủ quy trình phần mềm chuyên nghiệp (Release Flow), đảm bảo mã trên `master` luôn ổn định (stable), dễ dàng kiểm soát lỗi, quản lý các tính năng độc lập và rèn luyện thói quen làm việc nhóm.
